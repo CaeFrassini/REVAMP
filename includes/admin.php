@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $arquivo = $_FILES['product_img'];
         $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
         $novoNome = md5(time() . $arquivo['name']) . "." . $extensao;
-        $diretorio = "../assets/img/produtos/"; // Certifique-se que esta pasta existe
+        $diretorio = "../assets/img/"; // Certifique-se que esta pasta existe
 
         if(move_uploaded_file($arquivo['tmp_name'], $diretorio . $novoNome)) {
             try {
