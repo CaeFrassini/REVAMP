@@ -16,10 +16,9 @@
             <a href="../sac.php">SAC</a>
             <div class="nav-right-icons">
                 <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
-                <a href="login.php"><i class="fas fa-user"></i></a>
+                <a href="../login.php"><i class="fas fa-user"></i></a>
             </div>
         </nav>
     </header>
-    <h1>Gallery Page</h1>
 </body>
 </html>
