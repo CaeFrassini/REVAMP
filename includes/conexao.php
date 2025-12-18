@@ -1,12 +1,18 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "revamp";
+$host = 'localhost';
+$db_name = 'revamp';
+$username = 'root';
+$password = ''; 
 
-$conn = new mysqli($host, $user, $pass, $dbname);
+try {
 
-if($conn->connect_error){
-    die("Falha na conexão:" . $conn->connect_error);
+    $conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+    
+    
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    
+} catch(PDOException $e) {
+    echo "Erro na conexão: " . $e->getMessage();
 }
 ?>
