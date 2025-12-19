@@ -150,6 +150,7 @@ main {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    background-image: url('../img/wpp2.png');
     /* O flex: 1 que você já tem no main garante que ele ocupe o espaço entre o header e o footer */
 }
 
@@ -193,7 +194,7 @@ main {
     position: absolute;
     top: 10px;
     left: 0;
-    color: #666;
+    color: #f5f2f2;
     pointer-events: none;
     transition: 0.3s ease all;
     font-family: "Saira", sans-serif;
@@ -231,7 +232,7 @@ main {
     width: 100%;
     padding: 15px;
     background-color: #fff;
-    color: #000;
+    color: #090909;
     border: none;
     font-family: "Saira", sans-serif;
     font-weight: 700;
@@ -257,7 +258,7 @@ main {
 }
 
 .login-options a {
-    color: #555;
+    color: #f9f8f8;
     text-decoration: none;
     font-size: 11px;
     font-family: "Saira", sans-serif;
