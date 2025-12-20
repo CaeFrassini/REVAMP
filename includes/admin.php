@@ -18,7 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $arquivo = $_FILES['product_img'];
         $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
         $novoNome = md5(time() . $arquivo['name']) . "." . $extensao;
-        $diretorio = "../assets/img/"; // Certifique-se que esta pasta existe
+        // Salvar na pasta usada pelo frontend: assets/img/produtos/
+        $diretorio = __DIR__ . "/../assets/img/produtos/";
+
+        // Garante que a pasta exista
+        if (!is_dir($diretorio)) {
+            mkdir($diretorio, 0755, true);
+        }
 
         if(move_uploaded_file($arquivo['tmp_name'], $diretorio . $novoNome)) {
             try {

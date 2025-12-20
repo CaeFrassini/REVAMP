@@ -1,5 +1,9 @@
 <?php
 include 'includes/conexao.php';
+
+$query = "SELECT * FROM produtos";
+$stmt = $conn->query($query);
+$produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +29,42 @@ include 'includes/conexao.php';
         </nav>
     </header>
 
-    <section class="products-section">
-        </section>
+<section class="products-section">
+    <div class="product-grid">
+        <?php 
+        // Lista de produtos obtida via PDO
+        if(count($produtos) > 0):
+            foreach($produtos as $produto):
+        ?>
+            <article class="product-card">
+                <a href="produto_detalhes.php?id=<?php echo $produto['id']; ?>">
+                    <div class="product-image">
+                            <?php
+                                $imgWeb = 'assets/img/produtos/' . $produto['imagem'];
+                                $imgFs = __DIR__ . '/' . $imgWeb;
+                                if (!empty($produto['imagem']) && file_exists($imgFs)) {
+                                    echo '<img src="' . $imgWeb . '" alt="' . htmlspecialchars($produto['nome']) . '">';
+                                } else {
+                                    echo '<div class="no-image">Sem imagem</div>';
+                                }
+                            ?>
+                        <div class="product-overlay">
+                            <span>DETALHES</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name"><?php echo $produto['nome']; ?></h3>
+                        <p class="product-price">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>
+                    </div>
+                </a>
+            </article>
+        <?php 
+            endforeach; 
+        else:
+            echo "<p>Nenhum produto encontrado.</p>";
+        endif;
+        ?>
+    </div>
+</section>
 </body>
 </html>
