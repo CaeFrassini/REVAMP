@@ -143,7 +143,9 @@ main {
 .footer-links a:hover {
     color: rgb(69, 65, 65);
 }
-/* ------------------- Login Screen Styles (Adicione abaixo do seu CSS) ------------------ */
+/* ------------------- Login Screen Styles ------------------ */
+
+/* ------------------- Login Screen Styles ------------------ */
 
 .login-wrapper {
     display: flex;
@@ -151,7 +153,7 @@ main {
     align-items: center;
     padding: 20px;
     background-image: url('../img/wpp2.png');
-    /* O flex: 1 que você já tem no main garante que ele ocupe o espaço entre o header e o footer */
+    flex: 1; /* Garante que ocupe o espaço disponível */
 }
 
 .login-box {
@@ -160,16 +162,32 @@ main {
     padding: 60px 40px;
     background-color: #000;
     text-align: center;
-    /* Removi bordas para um look mais limpo, mas mantive o estilo minimalista */
 }
 
 .login-box h2 {
     font-family: "Saira", sans-serif;
     color: #fff;
     font-weight: 300;
-    letter-spacing: 8px;
-    margin-bottom: 50px;
+    letter-spacing: 2px;
+    margin-bottom: 20px; /* ALTERADO: De 50px para 20px para remover o excesso laranja */
     font-size: 24px;
+}
+
+/* Adicionando um estilo para a frase de instrução abaixo do título */
+.login-box p {
+    font-family: "Saira", sans-serif;
+    color: #ccc;
+    font-size: 13px;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.login-box a {
+    font-family: "Saira", sans-serif;
+    color: #fff;
+    font-weight: 300;
+    font-size: 12px;
+    text-decoration: none;
 }
 
 /* Container dos Inputs */
@@ -236,7 +254,7 @@ main {
     border: none;
     font-family: "Saira", sans-serif;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
     margin-top: 20px;
@@ -263,7 +281,7 @@ main {
     font-size: 11px;
     font-family: "Saira", sans-serif;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     transition: color 0.3s;
 }
 

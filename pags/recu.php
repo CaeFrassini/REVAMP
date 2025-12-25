@@ -1,0 +1,96 @@
+<?php
+require_once __DIR__ . '/../includes/conexao.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = filter_var($_POST['email'] ?? '', FILTER_VALIDATE_EMAIL);
+
+    // Sempre redirecionar com sucesso para não vazar existência de e-mail
+    $redirect = 'recu.php?status=sucesso';
+
+    if ($email) {
+        // verifica se o usuário existe
+        $stmt = $conn->prepare('SELECT id, email FROM usuarios WHERE email = :email LIMIT 1');
+        $stmt->execute([':email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            // gera token seguro
+            $token = bin2hex(random_bytes(16));
+
+            // insere pedido de recuperação
+            $sql = 'INSERT INTO recuperacao_Senha (email, token, data_expiracao, usado) VALUES (:email, :token, DATE_ADD(NOW(), INTERVAL 1 HOUR), 0)';
+            $ins = $conn->prepare($sql);
+            $ins->execute([':email' => $email, ':token' => $token]);
+
+            // monta link absoluto para redefinir senha
+            $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+            $resetLink = "http://{$host}/REVAMP/includes/redefinir_senha.php?token={$token}";
+
+            // tenta enviar e-mail (configurar servidor SMTP local/externo conforme necessário)
+            $subject = 'Recuperação de senha - REVAMP';
+            $message = "Olá,\n\nClique no link abaixo para redefinir sua senha (válido por 1 hora):\n\n" . $resetLink . "\n\nSe você não solicitou, ignore este e-mail.";
+            $headers = 'From: no-reply@' . $host . "\r\n";
+
+            @mail($email, $subject, $message, $headers);
+        }
+    }
+
+    header('Location: ' . $redirect);
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVAMP🌐 - RECUPERAÇÃO</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&family=Source+Code+Pro:wght@200..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header-container">
+        <nav>
+            <a href="../index.php">SHOP</a>
+            <a href="gallery.php">PHOTOS</a>
+            <a href="sac.php">SAC</a>
+            <div class="nav-right-icons">
+                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="../login.php"><i class="fas fa-user icon-link"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="login-wrapper">
+        <div class="login-box">
+            <form action="recu.php" method="POST">
+                <h2>RECUPERAÇÃO DE SENHA</h2>
+                <p>Por favor, insira seu e-mail para receber as instruções de recuperação de senha.</p>
+                
+                <div class="input-field">
+                    <input type="email" name="email" id="email" placeholder=" " required>
+                    <label for="email">E-mail</label>
+                </div>
+
+                <button type="submit" class="login-btn">RECUPERAR SENHA</button>
+
+                <div class="login-options" style="justify-content: center;">
+                    <a href="../login.php">Voltar ao Login</a>
+                </div>
+            </form>
+        </div>
+    </main> <?php if(isset($_GET['status']) && $_GET['status'] == 'sucesso'): ?>
+    <script>
+        Swal.fire({
+            title: 'Enviado!',
+            text: 'Se o e-mail existir, você receberá as instruções.',
+            icon: 'success',
+            confirmButtonColor: '#000'
+        });
+    </script>
+    <?php endif; ?>
+
+</body>
+</html>
