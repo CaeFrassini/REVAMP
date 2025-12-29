@@ -208,7 +208,7 @@ nav a:hover {
     display: none;
     max-width: 100%;
     max-height: 180px;
-    margin: 0 auto 10px;
+    margin: 0 auto 10px;   
     border-radius: 4px;
     object-fit: contain;
 }
@@ -231,4 +231,46 @@ input[type=number] {
     overflow: hidden;
     position: absolute;
     z-index: -1;
+}
+
+/*------------------- Grade de Estoque ADM ------------------*/
+
+.grade-estoque-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 30px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.grade-estoque-titulo {
+    grid-column: span 2;
+    font-family: "Saira", sans-serif;
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 5px;
+}
+
+.grade-estoque-container .input-field label {
+    top: -20px;
+    font-size: 10px;
+    color: #666; 
+    transition: 0.3s;
+}
+
+.grade-estoque-container input:focus ~ label {
+    color: #fff;
+}
+
+.grade-estoque-container .input-field {
+    margin-bottom: 40px; 
+}
+
+.grade-estoque-container input::placeholder {
+    color: #333;
+    opacity: 1;
 }

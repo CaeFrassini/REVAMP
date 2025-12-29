@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/conexao.php';
+require_once __DIR__ . '/includes/conexao.php';
 
 try {
     $stmt = $conn->query("SELECT id, nome, imagem FROM produtos ORDER BY id DESC LIMIT 20");

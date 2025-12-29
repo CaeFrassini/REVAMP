@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/conexao.php';
+require_once __DIR__ . '/includes/conexao.php';
 
 // Variáveis para controlar os pop-ups
 $status = ""; 

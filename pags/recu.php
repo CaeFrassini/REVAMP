@@ -56,8 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="../index.php">SHOP</a>
             <a href="gallery.php">PHOTOS</a>
             <a href="sac.php">SAC</a>
-            <div class="nav-right-icons">
-                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <div class="nav-right-icons">
+                <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
                 <a href="../login.php"><i class="fas fa-user icon-link"></i></a>
             </div>
         </nav>

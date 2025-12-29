@@ -1,43 +1,45 @@
 <?php
-require_once 'conexao.php';
+require_once __DIR__ . '/conexao.php';
 
 $status = "";
 $mensagem = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Pegando dados do formulário (ajustado para bater com os nomes dos inputs)
     $nome      = $_POST['name'];
     $preco     = $_POST['price'];
     $categoria = $_POST['category'];
     $descricao = $_POST['description'];
-    $tamanho   = $_POST['size'];
-    $estoque   = $_POST['stock'];
+    
+    $estoque_p  = $_POST['stock_p'] ?? 0;
+    $estoque_m  = $_POST['stock_m'] ?? 0;
+    $estoque_g  = $_POST['stock_g'] ?? 0;
+    $estoque_gg = $_POST['stock_gg'] ?? 0;
 
-    // Lógica de Upload da Imagem
     if (isset($_FILES['product_img']) && $_FILES['product_img']['error'] === 0) {
         $arquivo = $_FILES['product_img'];
         $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
         $novoNome = md5(time() . $arquivo['name']) . "." . $extensao;
-        // Salvar na pasta usada pelo frontend: assets/img/produtos/
         $diretorio = __DIR__ . "/../assets/img/produtos/";
 
-        // Garante que a pasta exista
         if (!is_dir($diretorio)) {
             mkdir($diretorio, 0755, true);
         }
 
         if(move_uploaded_file($arquivo['tmp_name'], $diretorio . $novoNome)) {
             try {
-                $sql = "INSERT INTO produtos (nome, preco, categoria, descricao, tamanho, estoque, imagem) 
-                        VALUES (:nome, :preco, :categoria, :descricao, :tamanho, :estoque, :imagem)";
+                $sql = "INSERT INTO produtos (nome, preco, categoria, descricao, estoque_p, estoque_m, estoque_g, estoque_gg, imagem) 
+                        VALUES (:nome, :preco, :categoria, :descricao, :p, :m, :g, :gg, :imagem)";
+                
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([
                     ':nome'      => $nome,
                     ':preco'     => $preco,
                     ':categoria' => $categoria,
                     ':descricao' => $descricao,
-                    ':tamanho'   => $tamanho,
-                    ':estoque'   => $estoque,
+                    ':p'         => $estoque_p,
+                    ':m'         => $estoque_m,
+                    ':g'         => $estoque_g,
+                    ':gg'        => $estoque_gg,
                     ':imagem'    => $novoNome
                 ]);
                 $status = "sucesso";
@@ -47,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         } else {
             $status = "erro";
-            $mensagem = "Falha ao mover arquivo para o servidor.";
+            $mensagem = "Falha ao mover arquivo.";
         }
     } else {
         $status = "erro";
@@ -100,26 +102,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="name">Nome do Produto</label>
                 </div>
 
-                <div style="display: flex; gap: 20px;">
-                    <div class="input-field" style="flex: 1;">
-                        <input type="number" name="price" id="price" step="0.01" placeholder=" " required>
-                        <label for="price">Preço (R$)</label>
-                    </div>
-                    <div class="input-field" style="flex: 1;">
-                        <input type="number" name="stock" id="stock" placeholder=" " required>
-                        <label for="stock">Estoque</label>
-                    </div>
+                <div class="input-field">
+                    <input type="number" name="price" id="price" step="0.01" placeholder=" " required>
+                    <label for="price">Preço (R$)</label>
                 </div>
 
-                <div class="input-field">
-                    <select name="size" id="size" required>
-                        <option value="" disabled selected></option>
-                        <option value="P">P</option>
-                        <option value="M">M</option>
-                        <option value="G">G</option>
-                        <option value="GG">GG</option>
-                    </select>
-                    <label for="size">Tamanho</label>
+                <div class="grade-estoque-container">
+                    <h3 class="grade-estoque-titulo">Estoque por Grade</h3>
+                    
+                    <div class="input-field">
+                        <input type="number" name="stock_p" id="stock_p" placeholder="0" required>
+                        <label for="stock_p">Qtd P</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="number" name="stock_m" id="stock_m" placeholder="0" required>
+                        <label for="stock_m">Qtd M</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="number" name="stock_g" id="stock_g" placeholder="0" required>
+                        <label for="stock_g">Qtd G</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="number" name="stock_gg" id="stock_gg" placeholder="0" required>
+                        <label for="stock_gg">Qtd GG</label>
+                    </div>
                 </div>
 
                 <div class="input-field">
@@ -142,9 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </main>
 
     <script src="../assets/js/script.js"></script>
-    
     <script>
-        // Este bloco lida com os avisos do PHP
         <?php if ($status == "sucesso"): ?>
             Swal.fire({ title: 'SUCESSO!', text: 'Produto cadastrado.', icon: 'success', confirmButtonColor: '#000' });
         <?php elseif ($status == "erro"): ?>

@@ -35,7 +35,7 @@ body {
 nav {
     position: relative;
     display: flex;
-    justify-content: center; /* Mantém SHOP e SAC centralizados */
+    justify-content: center; 
     align-items: center;
     width: 100%;
 }
@@ -52,18 +52,16 @@ nav a:hover {
     color: rgb(69, 65, 65);
 }
 
-/* Container para alinhar os dois ícones na direita */
 .nav-right-icons {
     position: absolute;
-    right: 40px;      /* Distância da borda direita */
-    display: flex;    /* Coloca um ícone ao lado do outro */
-    gap: 25px;        /* Espaço entre a bolsa e o bonequinho */
+    right: 40px;
+    display: flex;
+    gap: 25px;
     align-items: center;
 }
 
-/* Estilo específico para os links dentro do container da direita */
 .nav-right-icons a {
-    margin: 0;        /* Remove a margem lateral de 30px para não empurrar os ícones */
+    margin: 0;
     font-size: 22px;
     color: rgb(255, 255, 255);
 }
@@ -76,16 +74,6 @@ nav a:hover {
 main {
     width: 100%;
     flex: 1;
-}
-
-.wpp-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute; 
-    top: 0;
-    left: 0;
-    z-index: 1;
 }
 
 .section-products {
@@ -121,10 +109,6 @@ main {
     transition: background 0.3s;
 }
 
-#whatsapp-float:hover {
-    background-color: rgb(3, 255, 37);
-}
-
 .footer {
     text-align: center;
     padding: 20px 5%;
@@ -134,26 +118,142 @@ main {
     color: white;
 }
 
-.footer-links a {
-    color: rgb(255, 255, 255);
+/* ------------------- Grid de Produtos Atualizada ------------------ */
+
+.products-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 40px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 60px 25px;
+}
+
+.product-card {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.product-card a {
     text-decoration: none;
-    margin: 0 5px;
+    display: block;
 }
 
-.footer-links a:hover {
-    color: rgb(69, 65, 65);
+.product-image {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background-color: #0a0a0a;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
-/* ------------------- Login Screen Styles ------------------ */
 
-/* ------------------- Login Screen Styles ------------------ */
+.product-image img {
+    display: block; /* Garante que a imagem apareça */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay de Detalhes Normal */
+.product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.product-overlay span {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.75rem;
+    color: #000;
+    background: #fff;
+    padding: 12px 25px;
+    letter-spacing: 2px;
+}
+
+/* --- Estilos para Produto Esgotado (SOLD OUT) --- */
+
+.product-card.sold-out img {
+    filter: grayscale(100%);
+    opacity: 0.4;
+}
+
+.sold-out-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-family: "Saira", sans-serif;
+    font-weight: 700;
+    letter-spacing: 4px;
+    font-size: 14px;
+    border: 1.5px solid #fff;
+    padding: 10px 20px;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+/* Hover Effects */
+.product-card:not(.sold-out):hover img {
+    transform: scale(1.05);
+}
+
+.product-card:not(.sold-out):hover .product-overlay {
+    opacity: 1;
+}
+
+/* Tipografia */
+.product-info {
+    padding: 0 5px;
+}
+
+.product-name {
+    font-family: 'Saira', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.product-price {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.85rem;
+    color: #666; /* Cinza para preço conforme padrão ADM */
+    text-align: center;
+}
+
+.product-card.sold-out .product-price {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+/* ------------------- Telas de Login/ADM (Mantidas) ------------------ */
 
 .login-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-image: url('../img/wpp2.png');
-    flex: 1; /* Garante que ocupe o espaço disponível */
+    background-image: url('/REVAMP/assets/img/wpp2.png') !important; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex: 1;
 }
 
 .login-box {
@@ -167,34 +267,14 @@ main {
 .login-box h2 {
     font-family: "Saira", sans-serif;
     color: #fff;
-    font-weight: 300;
-    letter-spacing: 2px;
-    margin-bottom: 20px; /* ALTERADO: De 50px para 20px para remover o excesso laranja */
-    font-size: 24px;
+    letter-spacing: 8px;
+    margin-bottom: 50px;
 }
 
-/* Adicionando um estilo para a frase de instrução abaixo do título */
-.login-box p {
-    font-family: "Saira", sans-serif;
-    color: #ccc;
-    font-size: 13px;
-    margin-bottom: 40px;
-    line-height: 1.5;
-}
-
-.login-box a {
-    font-family: "Saira", sans-serif;
-    color: #fff;
-    font-weight: 300;
-    font-size: 12px;
-    text-decoration: none;
-}
-
-/* Container dos Inputs */
 .input-field {
     position: relative;
     margin-bottom: 35px;
-    border-bottom: 1px solid #333; /* Linha sutil */
+    border-bottom: 1px solid #333;
 }
 
 .input-field input {
@@ -212,179 +292,196 @@ main {
     position: absolute;
     top: 10px;
     left: 0;
-    color: #f5f2f2;
-    pointer-events: none;
+    color: #666;
     transition: 0.3s ease all;
     font-family: "Saira", sans-serif;
     text-transform: uppercase;
     font-size: 12px;
-    letter-spacing: 2px;
 }
 
-/* Efeito do Label flutuando quando clica ou digita */
 .input-field input:focus ~ label,
 .input-field input:not(:placeholder-shown) ~ label {
-    top: -15px;
-    font-size: 10px;
-    color: #fff;
+    top: -15px !important;
+    font-size: 10px !important;
+    color: #fff !important;
 }
 
-/* Linha de destaque ao focar */
-.input-field::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 0%;
-    height: 1px;
-    background-color: #fff;
-    transition: 0.4s;
-}
-
-.input-field:focus-within::after {
-    width: 100%;
-}
-
-/* Botão de Login */
 .login-btn {
     width: 100%;
     padding: 15px;
     background-color: #fff;
-    color: #090909;
+    color: #000;
     border: none;
     font-family: "Saira", sans-serif;
     font-weight: 700;
     letter-spacing: 2px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    margin-top: 20px;
+    transition: 0.3s;
 }
 
 .login-btn:hover {
-    background-color: rgb(200, 200, 200);
+    background-color: #ccc;
 }
 
-.login-btn:active {
-    transform: scale(0.98);
-}
-
-/* Links Inferiores */
 .login-options {
-    margin-top: 25px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Alinha um em cada ponta */
+    margin-top: 20px;
+    width: 100%;
 }
 
 .login-options a {
-    color: #f9f8f8;
-    text-decoration: none;
-    font-size: 11px;
-    font-family: "Saira", sans-serif;
+    color: #666; /* Cor cinza discreta */
+    text-decoration: none; /* Remove o sublinhado de link */
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: color 0.3s;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
 
 .login-options a:hover {
-    color: #fff;
+    color: #fff; /* Fica branco ao passar o mouse */
 }
 
-/* Reset e Variáveis para a Grade */
-:root {
-    --bg-card: #f8f8f8;
-    --text-primary: #111111;
-    --text-secondary: #777777;
-    --transition-smooth: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+/*------------------- Página de Detalhes ------------------*/
+.product-detail-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
 }
 
-.products-section {
-    width: 100%;
-    max-width: 1400px;
-    margin: 80px auto;
-    padding: 0 40px;
-}
-
-.product-grid {
+.product-container {
     display: grid;
-    /* Define 4 colunas no desktop, ajustando automaticamente */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 60px 25px;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    max-width: 1100px;
+    width: 100%;
 }
 
-/* Card Individual */
-.product-card a {
-    text-decoration: none;
+.product-view img {
+    width: 100%;
+    background-color: #0a0a0a;
+}
+
+.product-info-column {
+    color: #fff;
+    text-align: left;
+}
+
+.detail-name {
+    font-family: "Saira", sans-serif;
+    letter-spacing: 4px;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.detail-price {
+    font-family: "Source Code Pro", monospace;
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.detail-description {
+    font-family: "Saira", sans-serif;
+    font-weight: 300;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+}
+
+/* Seletor de Tamanhos */
+.size-selector {
+    margin-bottom: 30px;
+}
+
+.size-selector span {
     display: block;
+    font-family: "Saira", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 15px;
 }
 
-.product-image {
+.size-options {
+    display: flex;
+    gap: 15px;
+}
+
+.size-btn {
+    cursor: pointer;
     position: relative;
-    aspect-ratio: 3 / 4; /* Proporção ideal para moda */
-    background-color: #f8f8f8;
-    overflow: hidden;
-    margin-bottom: 20px;
 }
 
-.product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition-smooth);
+.size-btn input {
+    display: none; /* Esconde o radio original */
 }
 
-/* Efeito de Overlay (Minimalista) */
-.product-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(2px); /* Efeito de vidro suave */
+.size-name {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: var(--transition-smooth);
+    width: 50px;
+    height: 50px;
+    border: 1px solid #333;
+    font-family: "Source Code Pro", monospace;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
-.product-overlay span {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.75rem;
+/* Hover e Seleção */
+.size-btn:not(.disabled):hover .size-name {
+    border-color: #fff;
+}
+
+.size-btn input:checked + .size-name {
+    background-color: #fff;
     color: #000;
-    background: #fff;
-    padding: 12px 25px;
-    letter-spacing: 2px;
+    border-color: #fff;
 }
 
-/* Hover Effects */
-.product-card:hover img {
-    transform: scale(1.05);
+/* Tamanho Esgotado */
+.size-btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.2;
 }
 
-.product-card:hover .product-overlay {
-    opacity: 1;
+.size-btn.disabled .size-name {
+    text-decoration: line-through;
 }
 
-/* Tipografia do Produto */
-.product-info {
-    padding: 0 5px;
+/* Botão de Compra */
+.add-to-cart-btn {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    font-family: "Saira", sans-serif;
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 30px;
 }
 
-.product-name {
-    font-family: 'Saira', sans-serif;
-    font-weight: 400;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #f8f8f8;
+.add-to-cart-btn:hover:not(:disabled) {
+    background-color: #ccc;
+}
+
+.add-to-cart-btn:disabled {
+    background-color: #111;
+    color: #444;
+    cursor: not-allowed;
+}
+
+.extra-info p {
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 1px;
     margin-bottom: 8px;
-    text-align: center;
-}
-
-.product-price {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.85rem;
-    color: #f8f8f8;
-    text-align: center;
+    font-family: "Saira", sans-serif;
 }

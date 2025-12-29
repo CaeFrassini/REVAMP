@@ -1,5 +1,5 @@
 <?php
-include 'includes/conexao.php';
+require_once __DIR__ . '/includes/conexao.php';
 
 $query = "SELECT * FROM produtos";
 $stmt = $conn->query($query);
@@ -37,11 +37,11 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($produtos as $produto):
         ?>
             <article class="product-card">
-                <a href="produto_detalhes.php?id=<?php echo $produto['id']; ?>">
+                <a href="pags/produto_detalhes.php?id=<?php echo $produto['id']; ?>">
                     <div class="product-image">
                             <?php
-                                $imgWeb = 'assets/img/produtos/' . $produto['imagem'];
-                                $imgFs = __DIR__ . '/' . $imgWeb;
+                                $imgWeb = '/REVAMP/assets/img/produtos/' . $produto['imagem'];
+                                $imgFs = __DIR__ . '/assets/img/produtos/' . $produto['imagem'];
                                 if (!empty($produto['imagem']) && file_exists($imgFs)) {
                                     echo '<img src="' . $imgWeb . '" alt="' . htmlspecialchars($produto['nome']) . '">';
                                 } else {
