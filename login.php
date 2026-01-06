@@ -47,7 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             <a href="pags/sac.php">SAC</a>
             <div class="nav-right-icons">
                 <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
-                <a href="login.php"><i class="fas fa-user icon-link"></i></a>
+                <?php if (isset($_SESSION['usuario_id'])): ?>
+                    <a href="pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
+                <?php else: ?>
+                    <a href="login.php"><i class="fas fa-user"></i></a>
+                <?php endif; ?>
             </div>
         </nav>
     </header>
@@ -69,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <button type="submit" class="login-btn">ENTRAR</button>
 
                 <div class="login-options">
-                    <a href="pags/recu.php">Esqueceu a senha?</a>
+                    <a href="pags/profile/recu.php">Esqueceu a senha?</a>
                     <a href="regs.php">Cadastrar-se</a>
                 </div>
             </form>

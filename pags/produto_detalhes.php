@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../includes/conexao.php';
 
 // Pega o ID da URL
@@ -36,8 +37,12 @@ if (!$produto) {
             <a href="sac.php">SAC</a>
                 <div class="nav-right-icons">
                 <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
-                <a href="../login.php"><i class="fas fa-user"></i></a>
-            </div>
+             <?php if (isset($_SESSION['usuario_id'])): ?>
+                    <a href="profile/minha_conta.php"><i class="fas fa-user"></i></a>
+                <?php else: ?>
+                    <a href="../login.php"><i class="fas fa-user"></i></a>
+                <?php endif; ?>
+                </div>
         </nav>
     </header>
 

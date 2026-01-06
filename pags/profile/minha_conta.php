@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-// Caminho corrigido para quem está dentro da pasta 'pags'
-require_once __DIR__ . '/../includes/conexao.php';
+require_once __DIR__ . '/../../includes/conexao.php';
 
-// Proteção: Se não houver sessão, volta para o login na raiz
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../login.php");
     exit();
@@ -13,14 +11,13 @@ if (!isset($_SESSION['usuario_id'])) {
 $usuario_id = $_SESSION['usuario_id'];
 
 try {
-    // Agora buscando a coluna 'data_cadastro' que você confirmou ter
     $query = "SELECT nome, email, data_cadastro FROM usuarios WHERE id = :id";
     $stmt = $conn->prepare($query);
     $stmt->execute(['id' => $usuario_id]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
-        header("Location: ../includes/logout.php");
+        header("Location: ../../includes/logout.php");
         exit();
     }
 } catch (PDOException $e) {
@@ -35,8 +32,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MINHA CONTA | REVAMP🌐</title>
     
-    <link rel="stylesheet" href="../assets/css/styles.css"> 
-    <link rel="stylesheet" href="../assets/css/usuario.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css"> 
     
     <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&family=Source+Code+Pro:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -44,13 +40,18 @@ try {
 <body>
 
     <header class="header-container">
-        <nav>
-            <a href="../index.php">SHOP</a>
-            <a href="gallery.php">PHOTOS</a>
-            <a href="sac.php">SAC</a>
+            <nav>
+            <a href="../../index.php">SHOP</a>
+            <a href="../gallery.php">PHOTOS</a>
+            <a href="../sac.php">SAC</a>
             <div class="nav-right-icons">
-                <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
-                <a href="../includes/logout.php" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
+                <a href="../../bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <?php if (isset($_SESSION['usuario_id'])): ?>
+                    <a href="minha_conta.php"><i class="fas fa-user"></i></a>
+                <?php else: ?>
+                    <a href="../../login.php"><i class="fas fa-user"></i></a>
+                <?php endif; ?>
+                <a href="../../includes/logout.php" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
             </div>
         </nav>
     </header>
@@ -71,6 +72,7 @@ try {
                 <div class="info-card">
                     <span class="info-label">E-MAIL</span>
                     <p class="info-value"><?php echo htmlspecialchars($user['email']); ?></p>
+                    <a href="editar_perfil.php" class="btn-action">EDITAR PERFIL</a>
                 </div>
 
                 <div class="info-card">
@@ -86,12 +88,11 @@ try {
                 <div class="info-card">
                     <span class="info-label">SEGURANÇA</span>
                     <p class="info-value">••••••••••••</p>
-                    <a href="editar_perfil.php" class="btn-action">EDITAR PERFIL</a>
                 </div>
             </section>
 
             <div class="logout-section">
-                <a href="../includes/logout.php" class="logout-link">[ ENCERRAR_SESSÃO ]</a>
+                <a href="../../includes/logout.php" class="logout-link">[ SAIR ]</a>
             </div>
         </div>
     </main>

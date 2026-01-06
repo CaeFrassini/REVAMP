@@ -28,7 +28,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
                 
                 <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <a href="pags/minha_conta.php"><i class="fas fa-user"></i></a>
+                    <a href="pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
                     <a href="login.php"><i class="fas fa-user"></i></a>
                 <?php endif; ?>
