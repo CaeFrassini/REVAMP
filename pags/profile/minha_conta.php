@@ -46,11 +46,6 @@ try {
             <a href="../sac.php">SAC</a>
             <div class="nav-right-icons">
                 <a href="../../bag.php"><i class="fas fa-shopping-bag"></i></a>
-                <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <a href="minha_conta.php"><i class="fas fa-user"></i></a>
-                <?php else: ?>
-                    <a href="../../login.php"><i class="fas fa-user"></i></a>
-                <?php endif; ?>
                 <a href="../../includes/logout.php" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
             </div>
         </nav>

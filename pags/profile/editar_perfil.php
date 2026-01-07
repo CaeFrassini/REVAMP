@@ -83,6 +83,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 <body>
+    <header class="header-container">
+        <nav>
+            <a href="../../index.php">SHOP</a>
+            <a href="../gallery.php">PHOTOS</a>
+            <a href="../sac.php">SAC</a>
+            <div class="nav-right-icons">
+                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
+                
+                <?php if (isset($_SESSION['usuario_id'])): ?>
+                    <a href="pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
+                <?php else: ?>
+                    <a href="login.php"><i class="fas fa-user"></i></a>
+                <?php endif; ?>
+                </div>
+        </nav>
+    </header>
     <main class="login-wrapper">
         <div class="login-box">
             <h2>EDITAR PERFIL</h2>
@@ -95,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <form method="POST">
                 <div class="input-field">
-                    <input type="text" name="nome" id="nome" value="<?php echo htmlspecialchars($user['nome']); ?>" required>
+                    <input type="text" name="nome" id="nome" pattern="[A-Za-zÀ-ÿ\s]+" title="O nome deve conter apenas letras." value="<?php echo htmlspecialchars($user['nome']); ?>" required>
                     <label for="nome">NOME</label>
                 </div>
 

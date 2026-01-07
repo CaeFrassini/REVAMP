@@ -19,6 +19,22 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+<div class="carousel-container">
+        <div class="carousel-track">
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>     
+        </div>
+</div>
     <header class="header-container">
         <nav>
             <a href="index.php">SHOP</a>
@@ -35,7 +51,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
         </nav>
     </header>
-
 <section class="products-section">
     <div class="product-grid">
         <?php 

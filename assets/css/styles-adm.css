@@ -49,7 +49,7 @@ nav a {
 }
 
 nav a:hover {
-    color: rgb(69, 65, 65);
+    color: #959595;
 }
 
 .nav-right-icons {
@@ -67,7 +67,7 @@ nav a:hover {
 }
 
 .nav-right-icons a:hover {
-    color: rgb(69, 65, 65);
+    color: #959595;
 }
 
 /*------------------- Estilos Exclusivos ADM ------------------*/
@@ -130,7 +130,7 @@ nav a:hover {
     position: absolute;
     top: 10px;
     left: 0;
-    color: #666;
+    color: #959595;
     transition: 0.3s;
     font-size: 12px;
     text-transform: uppercase;
@@ -200,7 +200,7 @@ nav a:hover {
 /* Texto Secundário (Nome do arquivo) */
 .file-upload .sub-text {
     font-family: "Source Code Pro", monospace;
-    color: #666;
+    color: #959595;
     font-size: 11px;
 }
 
@@ -246,7 +246,7 @@ input[type=number] {
 .grade-estoque-titulo {
     grid-column: span 2;
     font-family: "Saira", sans-serif;
-    color: #666;
+    color: #959595;
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -258,7 +258,7 @@ input[type=number] {
 .grade-estoque-container .input-field label {
     top: -20px;
     font-size: 10px;
-    color: #666; 
+    color: #959595; 
     transition: 0.3s;
 }
 
@@ -271,6 +271,6 @@ input[type=number] {
 }
 
 .grade-estoque-container input::placeholder {
-    color: #333;
+    color: #959595;
     opacity: 1;
 }

@@ -71,7 +71,7 @@ if (!$produto) {
                     <input type="hidden" name="produto_id" value="<?php echo $produto['id']; ?>">
                     
                     <div class="size-selector">
-                        <span>SELECT SIZE</span>
+                        <span>TAMANHO</span>
                         <div class="size-options">
                             <?php 
                             $grades = [

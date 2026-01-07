@@ -14,6 +14,22 @@ require_once __DIR__ . '/../includes/conexao.php';
     <link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Saira:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
+            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>     
+        </div>
+</div>
     <header class="header-container">
         <nav>
             <a href="../index.php">SHOP</a>

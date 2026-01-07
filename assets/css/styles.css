@@ -21,6 +21,42 @@ body {
     min-height: 100vh;
 }
 
+.carousel-container {
+    width: 100%;
+    background-color: #000; 
+    color: #fff;            
+    overflow: hidden;       
+    padding: 5px 0;         /* Área bem menor (altura reduzida) */
+    white-space: nowrap;    
+    position: relative;
+    border-bottom: 1px solid #333; /* Opcional: linha fina para separar do header */
+}
+
+.carousel-track {
+    display: flex;
+    width: max-content;     
+    /* Tempo reduzido para 10s para ficar mais rápido */
+    animation: scroll 10s linear infinite; 
+}
+
+.slide {
+    padding: 0 20px;        /* Espaço menor entre as repetições */
+    font-family: 'Saira', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;     /* Letras pequenas */
+    letter-spacing: 1px;    /* Melhora a leitura de letras pequenas */
+    text-transform: uppercase;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 /*------------------- Header Styles ------------------*/
 .header-container {
     font-family: "Saira", sans-serif;
@@ -49,7 +85,7 @@ nav a {
 }
 
 nav a:hover {
-    color: rgb(69, 65, 65);
+    color: #959595;
 }
 
 .nav-right-icons {
@@ -67,7 +103,7 @@ nav a:hover {
 }
 
 .nav-right-icons a:hover {
-    color: rgb(69, 65, 65);
+    color: #959595;
 }
 
 /*------------------- Main & Sections ------------------*/
@@ -129,7 +165,7 @@ main {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 60px 25px;
 }
 
@@ -233,7 +269,7 @@ main {
 .product-price {
     font-family: 'Source Code Pro', monospace;
     font-size: 0.85rem;
-    color: #666; /* Cinza para preço conforme padrão ADM */
+    color: #959595; /* Cinza para preço conforme padrão ADM */
     text-align: center;
 }
 
@@ -292,7 +328,7 @@ main {
     position: absolute;
     top: 10px;
     left: 0;
-    color: #666;
+    color: #959595;
     transition: 0.3s ease all;
     font-family: "Saira", sans-serif;
     text-transform: uppercase;
@@ -331,7 +367,7 @@ main {
 }
 
 .login-options a {
-    color: #666; /* Cor cinza discreta */
+    color: #959595; /* Cor cinza discreta */
     text-decoration: none; /* Remove o sublinhado de link */
     font-size: 12px;
     text-transform: uppercase;
@@ -378,7 +414,7 @@ main {
 
 .detail-price {
     font-family: "Source Code Pro", monospace;
-    color: #666;
+    color: #959595;
     font-size: 1.2rem;
     margin-bottom: 30px;
 }
@@ -386,7 +422,7 @@ main {
 .detail-description {
     font-family: "Saira", sans-serif;
     font-weight: 300;
-    color: #ccc;
+    color: #959595;
     line-height: 1.6;
     margin-bottom: 40px;
     font-size: 0.95rem;
@@ -402,7 +438,7 @@ main {
     font-family: "Saira", sans-serif;
     font-size: 11px;
     letter-spacing: 2px;
-    color: #666;
+    color: #959595;
     margin-bottom: 15px;
 }
 
@@ -474,13 +510,13 @@ main {
 
 .add-to-cart-btn:disabled {
     background-color: #111;
-    color: #444;
+    color: #959595;
     cursor: not-allowed;
 }
 
 .extra-info p {
     font-size: 10px;
-    color: #444;
+    color: #959595;
     letter-spacing: 1px;
     margin-bottom: 8px;
     font-family: "Saira", sans-serif;
@@ -518,7 +554,7 @@ main {
 }
 
 .welcome-msg {
-    color: #444;
+    color: #959595;
     font-family: 'Source Code Pro', monospace;
     font-size: 10px;
     margin-top: 15px;
@@ -547,7 +583,7 @@ main {
 
 .info-label {
     font-family: 'Source Code Pro', monospace;
-    color: #666;
+    color: #959595;
     font-size: 9px;
     letter-spacing: 4px;
     display: block;
