@@ -155,6 +155,11 @@ main {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
 /* ------------------- Grid de Produtos Atualizada ------------------ */
 
 .products-section {
