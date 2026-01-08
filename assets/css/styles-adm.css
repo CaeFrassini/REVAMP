@@ -19,11 +19,16 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: var(--body-font);
 }
 
+:root {
+    --title-font: 'Saira', sans-serif;
+    --body-font: 'Source Code Pro', monospace;
+}
 /*------------------- Header Styles ------------------*/
 .header-container {
-    font-family: "Saira", sans-serif;
+    font-family: var(--title-font);
     width: 100%;
     background-color: rgb(0, 0, 0);
     box-shadow: 0 4px 8px 0 rgba(83, 82, 82, 0.515);
@@ -88,7 +93,7 @@ nav a:hover {
 }
 
 .login-box h2 {
-    font-family: "Saira", sans-serif;
+    font-family: var(--title-font);
     letter-spacing: 8px;
     margin-bottom: 50px;
     color: #fff;
@@ -108,7 +113,7 @@ nav a:hover {
     border: none;
     color: #fff;
     outline: none;
-    font-family: "Source Code Pro", monospace;
+    font-family: var(--body-font);
     font-size: 16px;
 }
 
@@ -190,7 +195,7 @@ nav a:hover {
 
 /* Texto Principal (Maiúsculo) */
 .file-upload .main-text {
-    font-family: "Saira", sans-serif;
+    font-family: var(--title-font);
     color: #fff;
     font-size: 14px;
     letter-spacing: 2px;
@@ -199,7 +204,7 @@ nav a:hover {
 
 /* Texto Secundário (Nome do arquivo) */
 .file-upload .sub-text {
-    font-family: "Source Code Pro", monospace;
+    font-family: var(--body-font);
     color: #959595;
     font-size: 11px;
 }
@@ -245,7 +250,7 @@ input[type=number] {
 
 .grade-estoque-titulo {
     grid-column: span 2;
-    font-family: "Saira", sans-serif;
+    font-family: var(--title-font);
     color: #959595;
     font-size: 11px;
     letter-spacing: 2px;

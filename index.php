@@ -19,22 +19,13 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-<div class="carousel-container">
-        <div class="carousel-track">
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>
-            <div class="slide">20% NA SUA PRIMEIRA COMPRA</div>     
+    <div class="top-announcement-bar">
+        <div class="ticker-content">
+            <span>SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 •SUPORTE PELO WHATSAPP 11 99898-6972  </span>
+            <span>SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 </span>
         </div>
-</div>
+    </div>
+    
     <header class="header-container">
         <nav>
             <a href="index.php">SHOP</a>
@@ -42,15 +33,15 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="pags/sac.php">SAC</a>
             <div class="nav-right-icons">
                 <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
-                
                 <?php if (isset($_SESSION['usuario_id'])): ?>
                     <a href="pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
                     <a href="login.php"><i class="fas fa-user"></i></a>
                 <?php endif; ?>
-                </div>
+            </div>
         </nav>
     </header>
+
 <section class="products-section">
     <div class="product-grid">
         <?php 

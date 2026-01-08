@@ -33,3 +33,14 @@ if (whatsappBtn) {
         window.open("https://chat.whatsapp.com/LyCM1uKQoG5FZozoF4Vhbd", "_blank");
     });
 }
+
+// Duplica o conteúdo do carrossel para permitir rolagem contínua
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.carousel-track').forEach(function(track) {
+        // evita duplicar várias vezes se o script for carregado novamente
+        if (!track.dataset.duplicated) {
+            track.innerHTML = track.innerHTML + track.innerHTML;
+            track.dataset.duplicated = 'true';
+        }
+    });
+});
