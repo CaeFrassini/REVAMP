@@ -25,7 +25,7 @@ require_once __DIR__ . '/../includes/conexao.php';
             <a href="gallery.php">PHOTOS</a>
             <a href="sac.php">SAC</a>
             <div class="nav-right-icons">
-                <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
                  <?php if (isset($_SESSION['usuario_id'])): ?>
                     <a href="profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>

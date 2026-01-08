@@ -4,7 +4,8 @@ require_once __DIR__ . '/conexao.php';
 $token = $_GET['token'] ?? '';
 
 if (empty($token)) {
-    die('Token não fornecido.');
+    header('Location: ../login.php?msg=token_nao_fornecido');
+    exit();
 }
 
 try {
@@ -14,11 +15,14 @@ try {
     $stmt->execute([':token' => $token]);
     $pedido = $stmt->fetch(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
-    die('Erro ao verificar token: ' . $e->getMessage());
+    error_log('Erro ao verificar token: ' . $e->getMessage());
+    header('Location: ../login.php?msg=token_error');
+    exit();
 }
 
 if (!$pedido) {
-    die('Este link é inválido, já foi usado ou expirou. Por favor, solicite a recuperação novamente.');
+    header('Location: ../login.php?msg=token_invalido');
+    exit();
 }
 
 $error = ''; // Inicializa a variável de erro

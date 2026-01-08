@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             <a href="pags/gallery.php">PHOTOS</a>
             <a href="pags/sac.php">SAC</a>
             <div class="nav-right-icons">
-                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="pags/bag.php"><i class="fas fa-shopping-bag"></i></a>
                 <?php if (isset($_SESSION['usuario_id'])): ?>
                     <a href="pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>

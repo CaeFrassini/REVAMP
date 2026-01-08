@@ -21,7 +21,9 @@ try {
         exit();
     }
 } catch (PDOException $e) {
-    die("Erro ao carregar dados: " . $e->getMessage());
+    error_log("Erro ao carregar dados: " . $e->getMessage());
+    header("Location: ../../includes/logout.php");
+    exit();
 }
 ?>
 
@@ -50,7 +52,7 @@ try {
             <a href="../gallery.php">PHOTOS</a>
             <a href="../sac.php">SAC</a>
             <div class="nav-right-icons">
-                <a href="../../bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
                 <a href="../../includes/logout.php" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
             </div>
         </nav>

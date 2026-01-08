@@ -16,7 +16,8 @@ $stmt->execute([':id' => $id]);
 $produto = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$produto) {
-    die("Produto não encontrado.");
+    header("Location: ../index.php?msg=produto_nao_encontrado");
+    exit();
 }
 ?>
 
@@ -42,7 +43,7 @@ if (!$produto) {
             <a href="gallery.php">PHOTOS</a>
             <a href="sac.php">SAC</a>
                 <div class="nav-right-icons">
-                <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
              <?php if (isset($_SESSION['usuario_id'])): ?>
                     <a href="profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
@@ -73,8 +74,9 @@ if (!$produto) {
                     <p><?php echo nl2br($produto['descricao']); ?></p>
                 </div>
 
-                <form action="../carrinho_adicionar.php" method="POST" class="purchase-form">
+                <form action="../includes/carrinho_adicionar.php" method="POST" class="purchase-form">
                     <input type="hidden" name="produto_id" value="<?php echo $produto['id']; ?>">
+                
                     
                     <div class="size-selector">
                         <span>TAMANHO</span>
@@ -99,7 +101,7 @@ if (!$produto) {
                     </div>
 
                     <button type="submit" class="add-to-cart-btn" <?php echo (array_sum($grades) <= 0) ? 'disabled' : ''; ?>>
-                        <?php echo (array_sum($grades) <= 0) ? 'OUT OF STOCK' : 'ADD TO BAG'; ?>
+                        <?php echo (array_sum($grades) <= 0) ? 'FORA DO ESTOQUE' : 'ADICIONAR NO CARRINHO'; ?>
                     </button>
                 </form>
 

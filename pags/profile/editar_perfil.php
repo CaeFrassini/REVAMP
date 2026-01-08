@@ -23,7 +23,10 @@ try {
         exit();
     }
 } catch (Exception $e) {
-    die('Erro ao buscar usuário: ' . $e->getMessage());
+    error_log('Erro ao buscar usuário: ' . $e->getMessage());
+    $mensagem = 'Erro ao buscar usuário.';
+    $tipo_mensagem = 'erro';
+    $user = ['nome' => '', 'email' => ''];
 }
 
 // 3. Verificar sucesso via GET
@@ -95,12 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="../gallery.php">PHOTOS</a>
             <a href="../sac.php">SAC</a>
             <div class="nav-right-icons">
-                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
                 
                 <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <a href="pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
+                    <a href="minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
-                    <a href="login.php"><i class="fas fa-user"></i></a>
+                    <a href="../../login.php"><i class="fas fa-user"></i></a>
                 <?php endif; ?>
                 </div>
         </nav>
