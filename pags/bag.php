@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . '/../includes/conexao.php';
 
-// 1. Lógica para remover item
 if (isset($_GET['remover'])) {
     $chave_remover = $_GET['remover'];
     if (isset($_SESSION['carrinho'][$chave_remover])) {
@@ -15,10 +14,9 @@ if (isset($_GET['remover'])) {
 $itens_carrinho_detalhes = [];
 $total_geral = 0;
 
-// 2. Busca detalhes dos produtos que estão na sessão
 if (!empty($_SESSION['carrinho'])) {
     foreach ($_SESSION['carrinho'] as $chave => $item) {
-        // Buscamos no banco os dados do produto pelo ID salvo na sessão
+        
         $stmt = $conn->prepare("SELECT * FROM produtos WHERE id = :id");
         $stmt->execute([':id' => $item['id']]);
         $produto_banco = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -27,7 +25,7 @@ if (!empty($_SESSION['carrinho'])) {
             $subtotal = $produto_banco['preco'] * $item['quantidade'];
             $total_geral += $subtotal;
             
-            // Montamos o array para exibição
+            
             $itens_carrinho_detalhes[] = [
                 'chave'      => $chave,
                 'nome'       => $produto_banco['nome'],

@@ -23,6 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['produto_id'], $_POST[
             'quantidade' => 1
         ];
     }
+    
+    $carrinho_json = json_encode($_SESSION['carrinho']);
+    
+    setcookie('revamp_cart', $carrinho_json, time() + (86400 * 30), "/");
 
     header("Location: ../pags/bag.php");
     exit;
