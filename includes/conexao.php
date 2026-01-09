@@ -22,4 +22,5 @@ try {
     echo 'Erro na conexão com o banco de dados. Tente novamente mais tarde.';
     exit;
 }
+
 ?>
