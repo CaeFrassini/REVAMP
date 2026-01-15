@@ -68,12 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <h2>LOGIN</h2>
                 <div class="input-field">
                     <input type="email" name="email" id="email" placeholder=" " required>
-                    <label for="email">E-mail</label>
+                    <label for="email">E-mail*</label>
                 </div>
 
                 <div class="input-field">
                     <input type="password" name="password" id="password" placeholder=" " required>
-                    <label for="password">Senha</label>
+                    <label for="password">Senha*</label>
                 </div>
 
                 <button type="submit" class="login-btn">ENTRAR</button>

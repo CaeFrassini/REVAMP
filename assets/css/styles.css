@@ -38,7 +38,7 @@ body {
 
 .ticker-content span {
     font-family: 'Source Code Pro', monospace;
-    color: #ffffff;
+    color: #f6ff00;
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -327,10 +327,18 @@ main {
 }
 
 .login-box h2 {
-    font-family: var(--title-font);
-    color: #fff;
-    letter-spacing: 8px;
+    font-family: 'franklin gothic medium', 'arial narrow', arial, sans-serif;
+    color: #ffffff;
+    letter-spacing: 2px;
     margin-bottom: 50px;
+}
+
+.login-box p {
+    font-family: 'franklin gothic medium', 'arial narrow', arial, sans-serif;
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
 }
 
 .input-field {
@@ -771,7 +779,7 @@ main {
 }
 
 .checkout-btn {
-    background: #000;
+    background: #000000;
     color: #fff;
     padding: 18px 50px;
     text-decoration: none;
@@ -784,4 +792,175 @@ main {
 .checkout-btn:hover {
     background: #333;
     transform: translateY(-2px);
+}
+
+/* CHECKOUT */
+.checkout-wrapper {
+    background-color: #000;
+    min-height: 100vh;
+    padding-top: 50px;
+}
+
+.checkout-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 60px;
+    padding: 0 20px;
+}
+
+.checkout-title {
+    font-family: 'Saira', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+    color: #ffffff;
+}
+
+/* Seções de Formulário */
+.checkout-section {
+    margin-bottom: 50px;
+    color: #ffffff;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 10px;
+}
+
+.section-header i { font-size: 1.2rem; }
+.section-header h2 {
+    font-family: 'Saira', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Inputs */
+.input-group { margin-bottom: 20px; }
+.input-row { display: grid; gap: 20px; }
+.grid-3-1 { grid-template-columns: 3fr 1fr; }
+
+.input-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: #999999;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #000000;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #000;
+    outline: none;
+}
+
+/* Opções de Pagamento */
+.payment-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #000000;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.payment-card:hover { background: #cccaca; }
+
+.payment-info { flex-grow: 1; margin-left: 15px; }
+.payment-info strong { display: block; font-size: 14px; }
+.payment-info small { color: #888; font-size: 12px; }
+
+.payment-card i { font-size: 1.5rem; }
+
+/* Sidebar de Resumo */
+.order-sidebar {
+    position: relative;
+}
+
+.sticky-sidebar {
+    top: 40px;
+    background: #f9f9f9;
+    padding: 30px;
+    border: 1px solid #eee;
+}
+
+.order-sidebar h3 {
+    font-family: 'Saira', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.item-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.item-info span {
+    display: block;
+    color: #777;
+    font-size: 11px;
+}
+
+.order-totals {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid #ffffff;
+}
+
+.total-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.grand-total {
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.free-shipping { color: #00a859; font-weight: 700; }
+
+/* Botão de Ação */
+.btn-complete {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 20px;
+    font-family: 'Saira', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.4s;
+    margin-top: 20px;
+}
+
+.btn-complete:hover { background: #333; }
+
+/* Responsividade */
+@media (max-width: 850px) {
+    .checkout-container { grid-template-columns: 1fr; }
+    .order-sidebar { order: -1; } /* Resumo aparece primeiro no mobile */
 }

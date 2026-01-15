@@ -72,15 +72,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="login-wrapper">
         <div class="login-box">
             <form action="recu.php" method="POST">
-                <h2>RECUPERAÇÃO DE SENHA</h2>
-                <p>Por favor, insira seu e-mail para receber as instruções de recuperação de senha.</p>
+                <h2>ALTERAR SENHA</h2>
+                <p>Por favor, insira seu e-mail para receber as instruções para mudar a senha.</p>
                 
                 <div class="input-field">
                     <input type="email" name="email" id="email" placeholder=" " required>
                     <label for="email">E-mail</label>
                 </div>
 
-                <button type="submit" class="login-btn">RECUPERAR SENHA</button>
+                <button type="submit" class="login-btn">ALTERAR SENHA</button>
 
                 <div class="login-options" style="justify-content: center;">
                     <a href="../../login.php">Voltar ao Login</a>

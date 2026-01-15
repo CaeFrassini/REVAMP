@@ -90,22 +90,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 
                 <div class="input-field">
                     <input type="text" name="nome" id="nome" placeholder=" " required>
-                    <label for="nome">Nome Completo</label>
+                    <label for="nome">Nome Completo*</label>
                 </div>
 
                 <div class="input-field">
                     <input type="email" name="email" id="email" placeholder=" " required>
-                    <label for="email">E-mail</label>
+                    <label for="email">E-mail*</label>
                 </div>
 
                 <div class="input-field">
                     <input type="password" name="password" id="password" placeholder=" " required>
-                    <label for="password">Senha</label>
+                    <label for="password">Senha*</label>
                 </div>
 
                 <div class="input-field">
                     <input type="password" name="confirm_password" id="confirm_password" placeholder=" " required>
-                    <label for="confirm_password">Confirmar Senha</label>
+                    <label for="confirm_password">Confirmar Senha*</label>
                 </div>
 
                 <button type="submit" class="login-btn">CRIAR CONTA</button>

@@ -90,6 +90,7 @@ try {
                 <div class="info-card">
                     <span class="info-label">SEGURANÇA</span>
                     <p class="info-value">••••••••••••</p>
+                    <a href="recu.php" class="btn-action">ALTERAR SENHA</a>
                 </div>
             </section>
 
