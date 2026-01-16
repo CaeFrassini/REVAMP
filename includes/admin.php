@@ -67,8 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../assets/css/styles-adm.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
+    <div class="top-announcement-bar">
+        <div class="ticker-content">
+            <span>MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐  </span>
+            <span>MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 </span>
+        </div>
+    </div>
     <header class="header-container">
         <nav>
             <a href="../index.php">SHOP</a>
@@ -134,15 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="number" name="stock_gg" id="stock_gg" placeholder="0" required>
                         <label for="stock_gg">Qtd GG</label>
                     </div>
-                </div>
-
-                <div class="input-field">
-                    <select name="category" id="category" required>
-                        <option value="" disabled selected></option>
-                        <option value="tees">T-SHIRTS</option>
-                        <option value="hoodies">HOODIES</option>
-                    </select>
-                    <label for="category">Categoria</label>
                 </div>
 
                 <div class="input-field">

@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REVAMP🌐-CADASTRO</title>
+    <title>CADASTRAR 🌐</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <body>
     <div class="top-announcement-bar">
         <div class="ticker-content">
-            <span>SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 •SUPORTE PELO WHATSAPP 11 99898-6972  </span>
-            <span>SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 </span>
+            <span>MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐  </span>
+            <span>MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 </span>
         </div>
     </div>
     <header class="header-container">

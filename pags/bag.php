@@ -45,7 +45,7 @@ if (!empty($_SESSION['carrinho'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAG - REVAMP🌐</title>
+    <title>BAG 🌐</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&family=Source+Code+Pro:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -53,8 +53,8 @@ if (!empty($_SESSION['carrinho'])) {
 <body>
     <div class="top-announcement-bar">
         <div class="ticker-content">
-            <span>SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 •</span>
-            <span>SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 • SUPORTE PELO WHATSAPP 11 99898-6972 •</span>
+            <span>MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐  </span>
+            <span>MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 • MAKE YOUR WORLD 🌐 </span>
         </div>
     </div>
     

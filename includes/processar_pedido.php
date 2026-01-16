@@ -2,92 +2,109 @@
 session_start();
 require_once __DIR__ . '/conexao.php';
 
-// 1. Verificações de segurança: se não está logado ou carrinho está vazio
+// 1. Verificações de segurança
 if (!isset($_SESSION['usuario_id']) || empty($_SESSION['carrinho'])) {
     header("Location: ../index.php");
     exit;
 }
 
-// 2. Receber e limpar os dados do formulário
 $usuario_id = $_SESSION['usuario_id'];
 $metodo_pagamento = $_POST['metodo_pagamento'] ?? 'pix';
 $cep = $_POST['cep'] ?? '';
-$endereco_completo = $_POST['rua'] . ", nº " . $_POST['numero'] . " " . ($_POST['complemento'] ?? '');
+$rua = $_POST['rua'] ?? '';
+$numero = $_POST['numero'] ?? '';
+$complemento = $_POST['complemento'] ?? '';
+$endereco_completo = $rua . ", nº " . $numero . " " . $complemento;
 
 try {
-    // Inicia uma Transação: se algo der errado em qualquer insert, nada é salvo
+    // Inicia a transação para garantir integridade dos dados
     $conn->beginTransaction();
 
-    // 3. Calcular o Total do Pedido (sempre calcule no servidor por segurança)
+    // 2. Calcular o Total do Pedido e preparar os dados
     $total_pedido = 0;
-    $itens_para_salvar = [];
+    $itens_detalhados = [];
 
     foreach ($_SESSION['carrinho'] as $item) {
-        $stmt = $conn->prepare("SELECT preco, nome FROM produtos WHERE id = :id");
-        $stmt->execute([':id' => $item['id']]);
-        $produto_bd = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt_prod = $conn->prepare("SELECT preco FROM produtos WHERE id = :id");
+        $stmt_prod->execute([':id' => $item['id']]);
+        $res = $stmt_prod->fetch(PDO::FETCH_ASSOC);
 
-        if ($produto_bd) {
-            $subtotal = $produto_bd['preco'] * $item['quantidade'];
+        if ($res) {
+            $preco_atual = $res['preco'];
+            $subtotal = $preco_atual * $item['quantidade'];
             $total_pedido += $subtotal;
-            
-            // Guardamos os dados para o segundo INSERT
-            $itens_para_salvar[] = [
-                'produto_id' => $item['id'],
-                'tamanho' => $item['tamanho'],
-                'quantidade' => $item['quantidade'],
-                'preco_unitario' => $produto_bd['preco']
+
+            $itens_detalhados[] = [
+                'id' => $item['id'],
+                'tam' => $item['tamanho'],
+                'qtd' => $item['quantidade'],
+                'preco' => $preco_atual
             ];
         }
     }
 
-    // 4. Inserir na tabela 'pedidos'
-    $sql_pedido = "INSERT INTO pedidos (usuario_id, total, endereco, cep, metodo_pagamento, status) 
-                   VALUES (:uid, :total, :end, :cep, :pag, 'pendente')";
+    // 3. Inserir na tabela 'pedidos'
+    $sql_ped = "INSERT INTO pedidos (usuario_id, total, endereco, cep, metodo_pagamento, status) 
+                VALUES (:uid, :tot, :end, :cep, :pag, 'pendente')";
     
-    $stmt = $conn->prepare($sql_pedido);
-    $stmt->execute([
+    $stmt_ped = $conn->prepare($sql_ped);
+    $stmt_ped->execute([
         ':uid'   => $usuario_id,
-        ':total' => $total_pedido,
+        ':tot'   => $total_pedido,
         ':end'   => $endereco_completo,
         ':cep'   => $cep,
         ':pag'   => $metodo_pagamento
     ]);
 
-    // Pega o ID do pedido que acabou de ser criado
     $pedido_id = $conn->lastInsertId();
 
-    // 5. Inserir os itens na tabela 'pedido_itens'
-    $sql_itens = "INSERT INTO pedido_itens (pedido_id, produto_id, tamanho, quantidade, preco_unitario) 
-                  VALUES (:pid, :prodid, :tam, :qtd, :preco)";
-    
-    $stmt_itens = $conn->prepare($sql_itens);
+    // 4. Inserir itens e atualizar estoque
+    $sql_item = "INSERT INTO pedido_itens (pedido_id, produto_id, tamanho, quantidade, preco_unitario) 
+                 VALUES (:pid, :prodid, :tam, :qtd, :prc)";
+    $stmt_item = $conn->prepare($sql_item);
 
-    foreach ($itens_para_salvar as $item) {
-        $stmt_itens->execute([
+    foreach ($itens_detalhados as $i) {
+        // Insere o item do pedido
+        $stmt_item->execute([
             ':pid'    => $pedido_id,
-            ':prodid' => $item['produto_id'],
-            ':tam'    => $item['tamanho'],
-            ':qtd'    => $item['quantidade'],
-            ':preco'  => $item['preco_unitario']
+            ':prodid' => $i['id'],
+            ':tam'    => $i['tam'],
+            ':qtd'    => $i['qtd'],
+            ':prc'    => $i['preco']
         ]);
+
+        // ATUALIZAÇÃO DE ESTOQUE
+        $coluna = "estoque_" . strtolower($i['tam']);
+        $colunas_permitidas = ['estoque_p', 'estoque_m', 'estoque_g', 'estoque_gg'];
+
+        if (in_array($coluna, $colunas_permitidas)) {
+            // Placeholder :qtd_estoque e :id_prod devem bater com o array do execute
+            $sql_stk = "UPDATE produtos SET $coluna = $coluna - :qtd_estoque WHERE id = :id_prod";
+            $stmt_stk = $conn->prepare($sql_stk);
+            $stmt_stk->execute([
+                ':qtd_estoque' => $i['qtd'],
+                ':id_prod'     => $i['id']
+            ]);
+        }
     }
 
-    // 6. Tudo certo! Confirmar gravação no banco
+    // 5. Finaliza a transação
     $conn->commit();
 
-    // 7. Limpar o Carrinho (Sessão e Cookie)
+    // 6. Limpa o carrinho
     unset($_SESSION['carrinho']);
     if (isset($_COOKIE['revamp_cart'])) {
         setcookie('revamp_cart', '', time() - 3600, "/");
     }
 
-    // 8. Redirecionar para a página de sucesso
+    // 7. Sucesso!
     header("Location: ../pags/sucesso.php?id=" . $pedido_id);
     exit;
 
 } catch (Exception $e) {
-    // Se der erro, cancela tudo que foi feito no banco
-    $conn->rollBack();
+    // Se der erro, desfaz tudo
+    if ($conn->inTransaction()) {
+        $conn->rollBack();
+    }
     die("Erro ao processar o pedido: " . $e->getMessage());
 }
