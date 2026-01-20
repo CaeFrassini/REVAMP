@@ -125,7 +125,7 @@ nav a:hover {
 }
 
 .login-box h2 {
-    font-family: var(--title-font);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;;
     letter-spacing: 8px;
     margin-bottom: 50px;
     color: #fff;
@@ -145,45 +145,10 @@ nav a:hover {
     border: none;
     color: #fff;
     outline: none;
-    font-family: var(--body-font);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;;
     font-size: 16px;
 }
 
-/* --- Ajuste específico para o SELECT (Categorias) --- */
-.input-field select {
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-/* Estilo das opções dentro do select */
-.input-field select option {
-    background-color: #1a1a1a; /* Fundo escuro para a lista */
-    color: #fff;               /* Texto branco para a lista */
-}
-
-.input-field label {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    color: #959595;
-    transition: 0.3s;
-    font-size: 12px;
-    text-transform: uppercase;
-}
-
-/* Efeito Flutuante */
-.input-field input:focus ~ label,
-.input-field input:not(:placeholder-shown) ~ label,
-.input-field select:focus ~ label,
-.input-field select:valid ~ label,
-.input-field textarea:focus ~ label,
-.input-field textarea:not(:placeholder-shown) ~ label {
-    top: -20px;
-    font-size: 10px;
-    color: #fff;
-}
 
 /* Botão Admin */
 .login-btn {
@@ -227,7 +192,7 @@ nav a:hover {
 
 /* Texto Principal (Maiúsculo) */
 .file-upload .main-text {
-    font-family: var(--title-font);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;;
     color: #fff;
     font-size: 14px;
     letter-spacing: 2px;
@@ -236,7 +201,7 @@ nav a:hover {
 
 /* Texto Secundário (Nome do arquivo) */
 .file-upload .sub-text {
-    font-family: var(--body-font);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;;
     color: #959595;
     font-size: 11px;
 }
@@ -282,7 +247,7 @@ input[type=number] {
 
 .grade-estoque-titulo {
     grid-column: span 2;
-    font-family: var(--title-font);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;;
     color: #959595;
     font-size: 11px;
     letter-spacing: 2px;

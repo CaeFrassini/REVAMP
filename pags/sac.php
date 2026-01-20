@@ -38,8 +38,8 @@ require_once __DIR__ . '/../includes/conexao.php';
     <main>
         <section class="sac" id="atendimento">
             <div class ="cnt">
-                <h1 class="titulo">SERVIÇO DE ATENDIMENTO AO CLIENTE</h1>
-                <p class="conteudo"><br><br>Nosso suporte funciona apenas pelo nosso whatsapp.<br><br>Entre em contato pelo nosso telefone 11 99898-6972<br><br>Use para tirar duvidas, efetuar trocas e devoluções.</p>
+                <h1 class="titulo"><br>SERVIÇO DE ATENDIMENTO AO CLIENTE 🌐</h1>
+                <p class="conteudo"><br><br><br>Nosso suporte funciona através dos nossos canais de comunicação<br><br>Entre em contato para tirar duvidas ou realizar trocas e devoluções.<br><br><br>Equipe REVAMP🌐 Agradece!</p>
             </div>
   </section>
  </main>

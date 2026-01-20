@@ -2,109 +2,115 @@
 session_start();
 require_once __DIR__ . '/conexao.php';
 
-// 1. Verificações de segurança
 if (!isset($_SESSION['usuario_id']) || empty($_SESSION['carrinho'])) {
     header("Location: ../index.php");
     exit;
 }
 
+$api_token = "abc_dev_QSrwJjzFurpBHydQY3tScamX"; 
+
 $usuario_id = $_SESSION['usuario_id'];
-$metodo_pagamento = $_POST['metodo_pagamento'] ?? 'pix';
 $cep = $_POST['cep'] ?? '';
 $rua = $_POST['rua'] ?? '';
 $numero = $_POST['numero'] ?? '';
 $complemento = $_POST['complemento'] ?? '';
-$endereco_completo = $rua . ", nº " . $numero . " " . $complemento;
+$endereco_completo = $rua . ", " . $numero . " " . $complemento;
 
 try {
-    // Inicia a transação para garantir integridade dos dados
     $conn->beginTransaction();
 
-    // 2. Calcular o Total do Pedido e preparar os dados
     $total_pedido = 0;
+    $itens_para_api = [];
     $itens_detalhados = [];
 
     foreach ($_SESSION['carrinho'] as $item) {
-        $stmt_prod = $conn->prepare("SELECT preco FROM produtos WHERE id = :id");
+        $stmt_prod = $conn->prepare("SELECT nome, preco FROM produtos WHERE id = :id");
         $stmt_prod->execute([':id' => $item['id']]);
-        $res = $stmt_prod->fetch(PDO::FETCH_ASSOC);
+        $prod = $stmt_prod->fetch(PDO::FETCH_ASSOC);
 
-        if ($res) {
-            $preco_atual = $res['preco'];
-            $subtotal = $preco_atual * $item['quantidade'];
-            $total_pedido += $subtotal;
+        if ($prod) {
+            $preco_un = $prod['preco'];
+            $total_pedido += ($preco_un * $item['quantidade']);
 
             $itens_detalhados[] = [
                 'id' => $item['id'],
                 'tam' => $item['tamanho'],
                 'qtd' => $item['quantidade'],
-                'preco' => $preco_atual
+                'preco' => $preco_un
+            ];
+
+            $itens_para_api[] = [
+                "externalId" => (string)$item['id'],
+                "name" => $prod['nome'] . " (" . $item['tamanho'] . ")",
+                "quantity" => (int)$item['quantidade'],
+                "priceUnit" => (int)($preco_un * 100)
             ];
         }
     }
 
-    // 3. Inserir na tabela 'pedidos'
     $sql_ped = "INSERT INTO pedidos (usuario_id, total, endereco, cep, metodo_pagamento, status) 
-                VALUES (:uid, :tot, :end, :cep, :pag, 'pendente')";
-    
+                VALUES (:uid, :tot, :end, :cep, 'pix', 'pendente')";
     $stmt_ped = $conn->prepare($sql_ped);
     $stmt_ped->execute([
-        ':uid'   => $usuario_id,
-        ':tot'   => $total_pedido,
-        ':end'   => $endereco_completo,
-        ':cep'   => $cep,
-        ':pag'   => $metodo_pagamento
+        ':uid' => $usuario_id,
+        ':tot' => $total_pedido,
+        ':end' => $endereco_completo,
+        ':cep' => $cep
     ]);
-
     $pedido_id = $conn->lastInsertId();
 
-    // 4. Inserir itens e atualizar estoque
-    $sql_item = "INSERT INTO pedido_itens (pedido_id, produto_id, tamanho, quantidade, preco_unitario) 
-                 VALUES (:pid, :prodid, :tam, :qtd, :prc)";
-    $stmt_item = $conn->prepare($sql_item);
-
+    
+    $stmt_item = $conn->prepare("INSERT INTO pedido_itens (pedido_id, produto_id, tamanho, quantidade, preco_unitario) 
+                                 VALUES (:pid, :prodid, :tam, :qtd, :prc)");
+    
     foreach ($itens_detalhados as $i) {
-        // Insere o item do pedido
         $stmt_item->execute([
-            ':pid'    => $pedido_id,
-            ':prodid' => $i['id'],
-            ':tam'    => $i['tam'],
-            ':qtd'    => $i['qtd'],
-            ':prc'    => $i['preco']
+            ':pid' => $pedido_id, ':prodid' => $i['id'], ':tam' => $i['tam'], ':qtd' => $i['qtd'], ':prc' => $i['preco']
         ]);
 
-        // ATUALIZAÇÃO DE ESTOQUE
+       
         $coluna = "estoque_" . strtolower($i['tam']);
-        $colunas_permitidas = ['estoque_p', 'estoque_m', 'estoque_g', 'estoque_gg'];
-
-        if (in_array($coluna, $colunas_permitidas)) {
-            // Placeholder :qtd_estoque e :id_prod devem bater com o array do execute
-            $sql_stk = "UPDATE produtos SET $coluna = $coluna - :qtd_estoque WHERE id = :id_prod";
-            $stmt_stk = $conn->prepare($sql_stk);
-            $stmt_stk->execute([
-                ':qtd_estoque' => $i['qtd'],
-                ':id_prod'     => $i['id']
-            ]);
-        }
+        $sql_stk = "UPDATE produtos SET $coluna = $coluna - :q WHERE id = :id";
+        $conn->prepare($sql_stk)->execute([':q' => $i['qtd'], ':id' => $i['id']]);
     }
 
-    // 5. Finaliza a transação
+   
+    $dados_abacate = [
+        "frequency" => "ONE_TIME",
+        "methods" => ["PIX"],
+        "products" => $itens_para_api,
+        "returnUrl" => "Dominio/site" . $pedido_id,
+        "completionUrl" => "Dominio/site" . $pedido_id
+    ];
+
+    $ch = curl_init("https://api.abacatepay.com/v1/billing/create");
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => ["Content-Type: application/json", "Authorization: Bearer $api_token"],
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($dados_abacate)
+    ]);
+
+    $res_api = curl_exec($ch);
+    $status_api = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($status_api !== 200 && $status_api !== 201) {
+        throw new Exception("Falha na API: " . $res_api);
+    }
+
+    $json_res = json_decode($res_api, true);
+    $url_pagamento = $json_res['data']['url'];
+
+    
     $conn->commit();
-
-    // 6. Limpa o carrinho
     unset($_SESSION['carrinho']);
-    if (isset($_COOKIE['revamp_cart'])) {
-        setcookie('revamp_cart', '', time() - 3600, "/");
-    }
+    setcookie('revamp_cart', '', time() - 3600, "/");
 
-    // 7. Sucesso!
-    header("Location: ../pags/sucesso.php?id=" . $pedido_id);
+    header("Location: " . $url_pagamento);
     exit;
 
 } catch (Exception $e) {
-    // Se der erro, desfaz tudo
-    if ($conn->inTransaction()) {
-        $conn->rollBack();
-    }
-    die("Erro ao processar o pedido: " . $e->getMessage());
+    if ($conn->inTransaction()) $conn->rollBack();
+    die("Erro: " . $e->getMessage());
 }

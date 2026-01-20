@@ -8,9 +8,7 @@ $mensagem = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome      = $_POST['name'];
     $preco     = $_POST['price'];
-    $categoria = $_POST['category'];
     $descricao = $_POST['description'];
-    
     $estoque_p  = $_POST['stock_p'] ?? 0;
     $estoque_m  = $_POST['stock_m'] ?? 0;
     $estoque_g  = $_POST['stock_g'] ?? 0;
@@ -28,14 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if(move_uploaded_file($arquivo['tmp_name'], $diretorio . $novoNome)) {
             try {
-                $sql = "INSERT INTO produtos (nome, preco, categoria, descricao, estoque_p, estoque_m, estoque_g, estoque_gg, imagem) 
-                        VALUES (:nome, :preco, :categoria, :descricao, :p, :m, :g, :gg, :imagem)";
+                $sql = "INSERT INTO produtos (nome, preco, descricao, estoque_p, estoque_m, estoque_g, estoque_gg, imagem) 
+                        VALUES (:nome, :preco, :descricao, :p, :m, :g, :gg, :imagem)";
                 
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([
                     ':nome'      => $nome,
                     ':preco'     => $preco,
-                    ':categoria' => $categoria,
                     ':descricao' => $descricao,
                     ':p'         => $estoque_p,
                     ':m'         => $estoque_m,
