@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $ins->execute([':email' => $email, ':token' => $token]);
 
             $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-            $resetLink = "http://{$host}/REVAMP/includes/redefinir_senha.php?token={$token}";
+            $resetLink = "http://{$host}/REVAMP/pags/profile/redefinir_senha.php?token={$token}";
 
             
             $subject = 'Recuperação de senha - REVAMP';
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RECUPERAÇÃO 🌐</title>
-    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="/REVAMP/assets/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&family=Source+Code+Pro:wght@200..900&display=swap" rel="stylesheet">
@@ -55,15 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <header class="header-container">
             <nav>
-            <a href="../../index.php">SHOP</a>
-            <a href="../gallery.php">PHOTOS</a>
-            <a href="../sac.php">SAC</a>
+            <a href="/REVAMP/index.php">SHOP</a>
+            <a href="/REVAMP/gallery.php">PHOTOS</a>
+            <a href="/REVAMP/sac.php">SAC</a>
                 <div class="nav-right-icons">
-                <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="/REVAMP/bag.php"><i class="fas fa-shopping-bag"></i></a>
                 <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <a href="minha_conta.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
-                    <a href="../../login.php"><i class="fas fa-user icon-link"></i></a>
+                    <a href="/REVAMP/login.php"><i class="fas fa-user icon-link"></i></a>
                 <?php endif; ?>
             </div>
         </nav>

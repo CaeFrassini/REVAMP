@@ -17,12 +17,12 @@ try {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
-        header("Location: ../../includes/logout.php");
+        header("Location: logout.php");
         exit();
     }
 } catch (PDOException $e) {
     error_log("Erro ao carregar dados: " . $e->getMessage());
-    header("Location: ../../includes/logout.php");
+    header("Location: logout.php");
     exit();
 }
 ?>
@@ -53,7 +53,7 @@ try {
             <a href="../sac.php">SAC</a>
             <div class="nav-right-icons">
                 <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
-                <a href="../../includes/logout.php" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
+                <a href="logout.php" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
             </div>
         </nav>
     </header>
@@ -95,7 +95,7 @@ try {
             </section>
 
             <div class="logout-section">
-                <a href="../../includes/logout.php" class="logout-link">[ SAIR ]</a>
+                <a href="logout.php" class="logout-link">[ SAIR ]</a>
             </div>
         </div>
     </main>

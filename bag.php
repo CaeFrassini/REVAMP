@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../includes/conexao.php';
+require_once __DIR__ . '/includes/conexao.php';
 
 if (isset($_GET['remover'])) {
     $chave_remover = $_GET['remover'];
@@ -46,7 +46,7 @@ if (!empty($_SESSION['carrinho'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BAG 🌐</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="/REVAMP/assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&family=Source+Code+Pro:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -60,15 +60,15 @@ if (!empty($_SESSION['carrinho'])) {
     
     <header class="header-container">
         <nav>
-            <a href="../index.php">SHOP</a>
-            <a href="gallery.php">PHOTOS</a>
-            <a href="sac.php">SAC</a>
+            <a href="/REVAMP/index.php">SHOP</a>
+            <a href="/REVAMP/gallery.php">PHOTOS</a>
+            <a href="/REVAMP/sac.php">SAC</a>
             <div class="nav-right-icons">
-                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="/REVAMP/bag.php"><i class="fas fa-shopping-bag"></i></a>
                 <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <a href="profile/minha_conta.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
-                    <a href="../login.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/login.php"><i class="fas fa-user"></i></a>
                 <?php endif; ?>
             </div>
         </nav>
@@ -99,7 +99,7 @@ if (!empty($_SESSION['carrinho'])) {
                     <tr>
                         <td data-label="Produto">
                             <div class="product-cart-item">
-                                <img src="../assets/img/produtos/<?php echo $item['imagem']; ?>" class="img-cart" alt="<?php echo $item['nome']; ?>">
+                                <img src="/REVAMP/assets/img/produtos/<?php echo $item['imagem']; ?>" class="img-cart" alt="<?php echo $item['nome']; ?>">
                                 <div class="product-cart-info">
                                     <strong><?php echo htmlspecialchars($item['nome']); ?></strong>
                                     <small>TAMANHO: <?php echo $item['tamanho']; ?></small>
@@ -131,8 +131,8 @@ if (!empty($_SESSION['carrinho'])) {
                 </div>
                 
                 <div class="checkout-actions">
-                    <a href="../index.php" class="btn-continue">Continuar Comprando</a>
-                    <a href="checkout.php" class="checkout-btn">FINALIZAR COMPRA</a>
+                    <a href="/REVAMP/index.php" class="btn-continue">Continuar Comprando</a>
+                        <a href="/REVAMP/checkout.php" class="checkout-btn">FINALIZAR COMPRA</a>
                 </div>
             </div>
         <?php endif; ?>

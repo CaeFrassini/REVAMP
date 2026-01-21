@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '/conexao.php';
+require_once __DIR__ . '/../../includes/conexao.php';
 
 $token = $_GET['token'] ?? '';
 
 if (empty($token)) {
-    header('Location: ../login.php?msg=token_nao_fornecido');
+    header('Location: /REVAMP/login.php?msg=token_nao_fornecido');
     exit();
 }
 
@@ -16,12 +16,12 @@ try {
     $pedido = $stmt->fetch(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     error_log('Erro ao verificar token: ' . $e->getMessage());
-    header('Location: ../login.php?msg=token_error');
+    header('Location: /REVAMP/login.php?msg=token_error');
     exit();
 }
 
 if (!$pedido) {
-    header('Location: ../login.php?msg=token_invalido');
+    header('Location: /REVAMP/login.php?msg=token_invalido');
     exit();
 }
 
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $conn->commit();
 
-            header('Location: ../login.php?msg=senha_atualizada');
+            header('Location: /REVAMP/login.php?msg=senha_atualizada');
             exit();
         } catch (Exception $e) {
             $conn->rollBack();
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redefinir Senha - REVAMP</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="/REVAMP/assets/css/styles.css">
 </head>
 <body>
     <div class="top-announcement-bar">
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </form>
             
             <div class="login-options" style="justify-content: center; margin-top: 20px;">
-                <a href="../login.php">Voltar ao Login</a>
+                <a href="/REVAMP/login.php">Voltar ao Login</a>
             </div>
         </div>
     </main>

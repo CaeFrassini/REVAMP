@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['produto_id'], $_POST[
     
     setcookie('revamp_cart', $carrinho_json, time() + (86400 * 30), "/");
 
-    header("Location: ../pags/bag.php");
+    header("Location: ../bag.php");
     exit;
 
 } else {

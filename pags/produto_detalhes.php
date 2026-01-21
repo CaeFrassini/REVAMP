@@ -26,7 +26,7 @@ if (!$produto) {
 <head>
     <meta charset="UTF-8">
     <title><?php echo $produto['nome']; ?>🌐</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="/REVAMP/assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&family=Source+Code+Pro:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -39,15 +39,15 @@ if (!$produto) {
     </div>
     <header class="header-container">
         <nav>
-            <a href="../index.php">SHOP</a>
-            <a href="gallery.php">PHOTOS</a>
-            <a href="sac.php">SAC</a>
+                <a href="/REVAMP/index.php">SHOP</a>
+            <a href="/REVAMP/gallery.php">PHOTOS</a>
+            <a href="/REVAMP/sac.php">SAC</a>
                 <div class="nav-right-icons">
-                <a href="bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="/REVAMP/bag.php"><i class="fas fa-shopping-bag"></i></a>
              <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <a href="profile/minha_conta.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
-                    <a href="../login.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/login.php"><i class="fas fa-user"></i></a>
                 <?php endif; ?>
                 </div>
         </nav>

@@ -79,8 +79,8 @@ try {
         "frequency" => "ONE_TIME",
         "methods" => ["PIX"],
         "products" => $itens_para_api,
-        "returnUrl" => "Dominio/site" . $pedido_id,
-        "completionUrl" => "Dominio/site" . $pedido_id
+        "returnUrl" => "http://localhost/revamp" . $pedido_id,
+        "completionUrl" => "http://localhost/revamp/includes/processar_pedido.php" . $pedido_id
     ];
 
     $ch = curl_init("https://api.abacatepay.com/v1/billing/create");

@@ -13,8 +13,8 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REVAMP 🌐</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/usuario.css">
+    <link rel="stylesheet" href="/REVAMP/assets/css/styles.css">
+    <link rel="stylesheet" href="/REVAMP/assets/css/usuario.css">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Saira:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -28,15 +28,15 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <header class="header-container">
         <nav>
-            <a href="index.php">SHOP</a>
-            <a href="pags/gallery.php">PHOTOS</a>
-            <a href="pags/sac.php">SAC</a>
+            <a href="/REVAMP/index.php">SHOP</a>
+            <a href="/REVAMP/gallery.php">PHOTOS</a>
+            <a href="/REVAMP/sac.php">SAC</a>
             <div class="nav-right-icons">
-                <a href="pags/bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="/REVAMP/bag.php"><i class="fas fa-shopping-bag"></i></a>
                 <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <a href="pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
-                    <a href="login.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/login.php"><i class="fas fa-user"></i></a>
                 <?php endif; ?>
             </div>
         </nav>

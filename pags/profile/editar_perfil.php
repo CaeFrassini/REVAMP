@@ -19,7 +19,7 @@ try {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if (!$user) {
-        header('Location: ../../includes/logout.php');
+        header('Location: logout.php');
         exit();
     }
 } catch (Exception $e) {

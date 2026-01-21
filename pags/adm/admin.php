@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/conexao.php';
+require_once __DIR__ . '/../../includes/conexao.php';
 
 $status = "";
 $mensagem = "";
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $arquivo = $_FILES['product_img'];
         $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
         $novoNome = md5(time() . $arquivo['name']) . "." . $extensao;
-        $diretorio = __DIR__ . "/../assets/img/produtos/";
+        $diretorio = __DIR__ . "/../../assets/img/produtos/";
 
         if (!is_dir($diretorio)) {
             mkdir($diretorio, 0755, true);
@@ -61,10 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>REVAMP🌐- ADM</title>
-    <link rel="stylesheet" href="../assets/css/styles-adm.css">
+    <link rel="stylesheet" href="/REVAMP/assets/css/styles-adm.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="/REVAMP/assets/css/styles.css">
 </head>
 <body>
     <div class="top-announcement-bar">
@@ -75,15 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <header class="header-container">
         <nav>
-            <a href="../index.php">SHOP</a>
-            <a href="../pags/gallery.php">PHOTOS</a>
-            <a href="../pags/sac.php">SAC</a>
+            <a href="/REVAMP/index.php">SHOP</a>
+            <a href="/REVAMP/gallery.php">PHOTOS</a>
+            <a href="/REVAMP/sac.php">SAC</a>
             <div class="nav-right-icons">
-                <a href="../bag.php"><i class="fas fa-shopping-bag"></i></a>
+                <a href="/REVAMP/bag.php"><i class="fas fa-shopping-bag"></i></a>
                 <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <a href="../pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/pags/profile/minha_conta.php"><i class="fas fa-user"></i></a>
                 <?php else: ?>
-                    <a href="../login.php"><i class="fas fa-user"></i></a>
+                    <a href="/REVAMP/login.php"><i class="fas fa-user"></i></a>
                 <?php endif; ?>
             </div>
         </nav>
@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </main>
 
-    <script src="../assets/js/script.js"></script>
+    <script src="/REVAMP/assets/js/script.js"></script>
     <script>
         <?php if ($status == "sucesso"): ?>
             Swal.fire({ title: 'SUCESSO!', text: 'Produto cadastrado.', icon: 'success', confirmButtonColor: '#000' });
